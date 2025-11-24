@@ -116,6 +116,12 @@ func awakenSSHCommand(r *Rouse, cfg *config.AppConfig) *exec.Cmd {
 			scriptPath := filepath.Join(currentPath, "Scripts", "iterm2_loader.scpt")
 			//command = fmt.Sprintf(`%s "%s"`, scriptPath, command)
 			cmd = exec.Command("osascript", "-s", "h", scriptPath, itermCmd, "0")
+		} else if appItem.Name == "ghostty" {
+			// Ghostty macOS 使用 open 命令启动，-e 参数执行命令
+			// 需要将命令和参数分开传递
+			args := []string{"-na", "Ghostty", "--args", "-e", clientPath}
+			args = append(args, strings.Split(commands, " ")...)
+			cmd = exec.Command("open", args...)
 		} else {
 			cmd = exec.Command(
 				"osascript", "-s", "h", "-e", fmt.Sprintf(`tell application "%s" to do script "%s %s" activate`,

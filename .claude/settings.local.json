@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(osadecompile:*)",
+      "Bash(cat:*)",
+      "Bash(ghostty:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
